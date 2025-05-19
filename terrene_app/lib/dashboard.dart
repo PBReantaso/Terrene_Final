@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'running.dart';
 import 'profile.dart';
+import 'package:flutter/services.dart';
+import 'storyscreens.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      systemNavigationBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarIconBrightness: Brightness.light,
+    ));
+
     final darkGreen = const Color(0xFF204B3A);
     final lightGreen = const Color(0xFFAED9A3);
     final orange = const Color(0xFFF57C1F);
@@ -14,176 +23,200 @@ class DashboardScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: darkGreen,
-      body: SafeArea(
-        child: SizedBox(
-          height: size.height - MediaQuery.of(context).padding.top - MediaQuery.of(context).padding.bottom,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Profile Row
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 18, 16, 0),
-                child: Row(
-                  children: [
-                    // Profile image
-                    CircleAvatar(
-                      radius: 22,
-                      backgroundImage: AssetImage('lib/assets/profile.jpg'), 
-                    ),
-                    const SizedBox(width: 12),
-                    // User name
-                    Text(
-                      'Christian Antonio',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: Color.fromARGB(255, 255, 255, 255),
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const Spacer(),
-                    // Settings icon
-                    IconButton(
-                      icon: const Icon(Icons.settings, color: Color.fromARGB(255, 255, 255, 255), size: 32),
-                      onPressed: () {}, // TODO: Add settings navigation
-                    ),
-                  ],
-                ),
-              ),
-              // Progress Card
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 12, 16, 1),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: lightGreen,
-                    borderRadius: BorderRadius.circular(cardRadius),
-                  ),
-                  padding: const EdgeInsets.all(18),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'lib/assets/BG.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+          SafeArea(
+            child: SizedBox(
+              height: size.height - MediaQuery.of(context).padding.top - MediaQuery.of(context).padding.bottom,
+              child: Stack(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(Icons.thumb_up_alt_rounded, color: Colors.white, size: 32),
-                          const SizedBox(width: 12),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                '11 KM',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w800,
-                                  fontSize: 22,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(height: 2),
-                              Text(
-                                'More till the next story unlock',
-                                style: TextStyle(fontSize: 14, color: Colors.white70, fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          ),
-                          Spacer(),
-                          Icon(Icons.chevron_right, color: Colors.white, size: 28),
-                        ],
-                      ),
-                      const SizedBox(height: 14),
-                      // Progress bar
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Stack(
+                      // Profile Row
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 18, 16, 0),
+                        child: Row(
                           children: [
-                            Container(
-                              height: 12,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                              ),
+                            // Profile image
+                            CircleAvatar(
+                              radius: 22,
+                              backgroundImage: AssetImage('lib/assets/profile.jpg'), 
                             ),
-                            FractionallySizedBox(
-                              widthFactor: 0.7, // 70% progress
-                              child: Container(
-                                height: 12,
-                                decoration: BoxDecoration(
-                                  color: orange,
-                                ),
+                            const SizedBox(width: 12),
+                            // User name
+                            Text(
+                              'Christian Antonio',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF1B4D3E),
                               ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const Spacer(),
+                            // Settings icon
+                            IconButton(
+                              icon: const Icon(Icons.settings, color: Color(0xFF1B4D3E), size: 32),
+                              onPressed: () {}, // TODO: Add settings navigation
                             ),
                           ],
                         ),
                       ),
+                      // Progress Card
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 12, 16, 1),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xFF84A175),
+                            borderRadius: BorderRadius.circular(cardRadius),
+                            border: Border.all(color: Color(0xFF9DC08B), width: 4),
+                          ),
+                          padding: const EdgeInsets.all(18),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.thumb_up_alt_rounded, color: Colors.white, size: 32),
+                                  const SizedBox(width: 12),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: const [
+                                      Text(
+                                        '11 KM',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w800,
+                                          fontSize: 22,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      SizedBox(height: 2),
+                                      Text(
+                                        'More till the next story unlock',
+                                        style: TextStyle(fontSize: 14, color: Colors.white70, fontWeight: FontWeight.w400),
+                                      ),
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Icon(Icons.chevron_right, color: Color(0xFF1B4D3E), size: 28),
+                                ],
+                              ),
+                              const SizedBox(height: 14),
+                              // Progress bar
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      height: 12,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    FractionallySizedBox(
+                                      widthFactor: 0.7, // 70% progress
+                                      child: Container(
+                                        height: 12,
+                                        decoration: BoxDecoration(
+                                          color: orange,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      // Start Running Button (full width, bold)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                        child: Center(
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const RunningScreen()),
+                              );
+                            },
+                            child: Image.asset(
+                              'lib/assets/Start.png',
+                              height: 100,
+                            ),
+                          ),
+                        ),
+                      ),
+                      // Recent Activity Title
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: Row(
+                          children: [
+                            const Text(
+                              'Recent Activity',
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+                            ),
+                            const Spacer(),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text('All', style: TextStyle(color: orange, fontWeight: FontWeight.bold, fontSize: 13)),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Recent Activity Card (fills available space)
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(12, 8, 12, 70),
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(cardRadius),
+                              border: Border.all(color: Color(0xFF9DC08B), width: 4),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.03),
+                                  blurRadius: 6,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                _ActivityCard(orange: orange, radius: cardRadius),
+                                const SizedBox(height: 3),
+                                _ActivityCard(orange: orange, radius: cardRadius),
+                                const SizedBox(height: 3),
+                                _ActivityCard(orange: orange, radius: cardRadius),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                ),
+                ],
               ),
-              // Start Running Button (full width, bold)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-                child: Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const RunningScreen()),
-                      );
-                    },
-                    child: Image.asset(
-                      'lib/assets/Start.png',
-                      height: 100,
-                    ),
-                  ),
-                ),
-              ),
-              // Recent Activity Title
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: Row(
-                  children: [
-                    const Text(
-                      'Recent Activity',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
-                    ),
-                    const Spacer(),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text('All', style: TextStyle(color: orange, fontWeight: FontWeight.bold, fontSize: 13)),
-                    ),
-                  ],
-                ),
-              ),
-              // Recent Activity Card (fills available space)
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 8, 12, 20),
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(cardRadius),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.03),
-                          blurRadius: 6,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: ListView.separated(
-                      padding: const EdgeInsets.all(12),
-                      itemCount: 3,
-                      separatorBuilder: (context, index) => const Divider(height: 16, color: Colors.transparent),
-                      itemBuilder: (context, index) => _ActivityCard(orange: orange, radius: cardRadius),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
+          // Navigation bar outside SafeArea, so it can go under the home indicator
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: _DashboardNavBarBig(darkGreen: darkGreen, lightGreen: lightGreen),
+          ),
+        ],
       ),
-      bottomNavigationBar: _DashboardNavBarBig(darkGreen: darkGreen, lightGreen: lightGreen),
     );
   }
 }
@@ -244,34 +277,55 @@ class _DashboardNavBarBig extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: lightGreen,
+        color: Color(0xFF9DC08B),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(36),
           topRight: Radius.circular(36),
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 10,
-            offset: const Offset(0, -2),
-          ),
-        ],
       ),
       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Icon(Icons.home, size: 40, color: Colors.white),
-          Icon(Icons.bar_chart, size: 40, color: Colors.black54),
-          Icon(Icons.receipt_long, size: 40, color: Colors.black54),
           GestureDetector(
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) => const DashboardScreen(),
+                  transitionDuration: Duration.zero,
+                  reverseTransitionDuration: Duration.zero,
+                ),
               );
             },
-            child: Icon(Icons.person, size: 40, color: Colors.black54),
+            child: Icon(Icons.home, size: 40, color: Colors.white),
+          ),
+          Icon(Icons.bar_chart, size: 40, color: Color(0xFF1B4D3E)),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) => const StoryScreens(),
+                  transitionDuration: Duration.zero,
+                  reverseTransitionDuration: Duration.zero,
+                ),
+              );
+            },
+            child: Icon(Icons.receipt_long, size: 40, color: Color(0xFF1B4D3E)),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) => const ProfileScreen(),
+                  transitionDuration: Duration.zero,
+                  reverseTransitionDuration: Duration.zero,
+                ),
+              );
+            },
+            child: Icon(Icons.person, size: 40, color: Color(0xFF1B4D3E)),
           ),
         ],
       ),

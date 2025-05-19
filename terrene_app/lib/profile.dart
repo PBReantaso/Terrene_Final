@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dashboard.dart';
+import 'storyscreens.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -12,212 +14,226 @@ class ProfileScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: darkGreen,
-      body: SafeArea(
-        child: SizedBox(
-          height: size.height - MediaQuery.of(context).padding.top - MediaQuery.of(context).padding.bottom,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // Profile Header Card
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 18, 16, 1),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                    decoration: BoxDecoration(
-                      color: cardColor,
-                      borderRadius: BorderRadius.circular(cardRadius),
-                      border: Border.all(color: darkGreen, width: 2),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.03),
-                          blurRadius: 6,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      children: [
-                        const CircleAvatar(
-                          radius: 50,
-                          backgroundColor: Colors.white,
-                          child: Icon(Icons.person, size: 50, color: Colors.grey),
-                        ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          'John Doe',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'john.doe@example.com',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black87.withOpacity(0.7),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                // Stats Section Title
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                  child: Row(
-                    children: [
-                      const Text(
-                        'Your Stats',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
-                      ),
-                      const Spacer(),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text('View All', style: TextStyle(color: orange, fontWeight: FontWeight.bold, fontSize: 13)),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // Stats Cards
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 8, 12, 20),
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(cardRadius),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.03),
-                          blurRadius: 6,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              _StatCard(
-                                icon: Icons.directions_run,
-                                value: '156',
-                                label: 'Total Runs',
-                                color: cardColor,
-                              ),
-                              const SizedBox(width: 16),
-                              _StatCard(
-                                icon: Icons.timer,
-                                value: '42h',
-                                label: 'Time Spent',
-                                color: cardColor,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          Row(
-                            children: [
-                              _StatCard(
-                                icon: Icons.emoji_events,
-                                value: '12',
-                                label: 'Achievements',
-                                color: cardColor,
-                              ),
-                              const SizedBox(width: 16),
-                              _StatCard(
-                                icon: Icons.local_fire_department,
-                                value: '8,450',
-                                label: 'Calories',
-                                color: cardColor,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-
-                // Settings Section Title
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
-                  child: Row(
-                    children: [
-                      const Text(
-                        'Settings',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // Settings Cards
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 8, 12, 20),
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(cardRadius),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.03),
-                          blurRadius: 6,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        children: [
-                          _SettingsCard(
-                            icon: Icons.person_outline,
-                            title: 'Edit Profile',
-                            onTap: () {},
-                            color: cardColor,
-                          ),
-                          _SettingsCard(
-                            icon: Icons.notifications_outlined,
-                            title: 'Notifications',
-                            onTap: () {},
-                            color: cardColor,
-                          ),
-                          _SettingsCard(
-                            icon: Icons.privacy_tip_outlined,
-                            title: 'Privacy',
-                            onTap: () {},
-                            color: cardColor,
-                          ),
-                          _SettingsCard(
-                            icon: Icons.help_outline,
-                            title: 'Help & Support',
-                            onTap: () {},
-                            color: cardColor,
-                          ),
-                          _SettingsCard(
-                            icon: Icons.logout,
-                            title: 'Logout',
-                            onTap: () {},
-                            color: cardColor,
-                            isLogout: true,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'lib/assets/BG.png',
+              fit: BoxFit.cover,
             ),
           ),
-        ),
+          SafeArea(
+            child: SizedBox(
+              height: size.height - MediaQuery.of(context).padding.top - MediaQuery.of(context).padding.bottom,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // Profile Header Card
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 18, 16, 1),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                        decoration: BoxDecoration(
+                          color: Color(0xFF84A175),
+                          borderRadius: BorderRadius.circular(cardRadius),
+                          border: Border.all(color: Color(0xFF9DC08B), width: 4),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.03),
+                              blurRadius: 6,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            const CircleAvatar(
+                              radius: 50,
+                              backgroundColor: Colors.white,
+                              child: Icon(Icons.person, size: 50, color: Colors.grey),
+                            ),
+                            const SizedBox(height: 16),
+                            const Text(
+                              'John Doe',
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFFFFFFFF),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'john.doe@example.com',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Color(0xFFFFFFFF),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    // Stats Section Title
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                      child: Row(
+                        children: [
+                          const Text(
+                            'Your Stats',
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+                          ),
+                          const Spacer(),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text('View All', style: TextStyle(color: orange, fontWeight: FontWeight.bold, fontSize: 13)),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    // Stats Cards
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(12, 8, 12, 20),
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(cardRadius),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.03),
+                              blurRadius: 6,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  _StatCard(
+                                    icon: Icons.directions_run,
+                                    value: '156',
+                                    label: 'Total Runs',
+                                    color: cardColor,
+                                  ),
+                                  const SizedBox(width: 16),
+                                  _StatCard(
+                                    icon: Icons.timer,
+                                    value: '42h',
+                                    label: 'Time Spent',
+                                    color: cardColor,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 16),
+                              Row(
+                                children: [
+                                  _StatCard(
+                                    icon: Icons.emoji_events,
+                                    value: '12',
+                                    label: 'Achievements',
+                                    color: cardColor,
+                                  ),
+                                  const SizedBox(width: 16),
+                                  _StatCard(
+                                    icon: Icons.local_fire_department,
+                                    value: '8,450',
+                                    label: 'Calories',
+                                    color: cardColor,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    // Settings Section Title
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
+                      child: Row(
+                        children: [
+                          const Text(
+                            'Settings',
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    // Settings Cards
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(12, 8, 12, 20),
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(cardRadius),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.03),
+                              blurRadius: 6,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            children: [
+                              _SettingsCard(
+                                icon: Icons.person_outline,
+                                title: 'Edit Profile',
+                                onTap: () {},
+                                color: cardColor,
+                              ),
+                              _SettingsCard(
+                                icon: Icons.notifications_outlined,
+                                title: 'Notifications',
+                                onTap: () {},
+                                color: cardColor,
+                              ),
+                              _SettingsCard(
+                                icon: Icons.privacy_tip_outlined,
+                                title: 'Privacy',
+                                onTap: () {},
+                                color: cardColor,
+                              ),
+                              _SettingsCard(
+                                icon: Icons.help_outline,
+                                title: 'Help & Support',
+                                onTap: () {},
+                                color: cardColor,
+                              ),
+                              _SettingsCard(
+                                icon: Icons.logout,
+                                title: 'Logout',
+                                onTap: () {},
+                                color: cardColor,
+                                isLogout: true,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: _DashboardNavBarBig(darkGreen: darkGreen, lightGreen: cardColor),
+          ),
+        ],
       ),
-      bottomNavigationBar: _DashboardNavBarBig(darkGreen: darkGreen, lightGreen: cardColor),
     );
   }
 }
@@ -337,7 +353,7 @@ class _DashboardNavBarBig extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: lightGreen,
+        color: Color(0xFF9DC08B),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(36),
           topRight: Radius.circular(36),
@@ -356,13 +372,44 @@ class _DashboardNavBarBig extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.pop(context); // Go back to dashboard
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) => const DashboardScreen(),
+                  transitionDuration: Duration.zero,
+                  reverseTransitionDuration: Duration.zero,
+                ),
+              );
             },
-            child: Icon(Icons.home, size: 40, color: Colors.black54),
+            child: Icon(Icons.home, size: 40, color: const Color(0xFF1B4D3E)),
           ),
-          Icon(Icons.bar_chart, size: 40, color: Colors.black54),
-          Icon(Icons.receipt_long, size: 40, color: Colors.black54),
-          Icon(Icons.person, size: 40, color: Colors.white), // Active profile icon
+          Icon(Icons.bar_chart, size: 40, color: const Color(0xFF1B4D3E)),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) => const StoryScreens(),
+                  transitionDuration: Duration.zero,
+                  reverseTransitionDuration: Duration.zero,
+                ),
+              );
+            },
+            child: Icon(Icons.receipt_long, size: 40, color: const Color(0xFF1B4D3E)),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) => const ProfileScreen(),
+                  transitionDuration: Duration.zero,
+                  reverseTransitionDuration: Duration.zero,
+                ),
+              );
+            },
+            child: Icon(Icons.person, size: 40, color: Colors.white),
+          ),
         ],
       ),
     );
